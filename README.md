@@ -26,15 +26,22 @@ The server uses environment variables for tuning many of its parameters, as spec
 - `MODEL_FOLDER`: Folder from which to load the models. See [Loading Models](#Loading%20Models) below. Defaults to `./models`.
 - `MIN_CONFIDENCE`: Minimum score required for us to include a match in our results. Defaults to `0.8`.
 
-# Loading Models
+# Loading Object Detection Models
 
 On startup, the server looks in `MODEL_FOLDER` for any files named `<prefix>.frozen.pb`. It uses those prefixes to load those frozen model files into their own TensorFlow sessions, and looks for category mapping files named `<prefix>.label_map.pbtxt` and loads those as well, all in a model map indexed by prefix.
 
 When the server is shut down, an [`atexit`](https://docs.python.org/3/library/atexit.html) hook will `close()` all open TensorFlow sessions.
 
+# Loading Image classification Models
+
+On startup, the server looks in `MODEL_FOLDER` for any files named `<prefix>.pb`. It uses those prefixes to load those frozen model files into their own TensorFlow sessions, and looks for category mapping files named `<prefix>.pbtxt` and loads those as well, all in a model map indexed by prefix.
+
+When the server is shut down, an [`atexit`](https://docs.python.org/3/library/atexit.html) hook will `close()` all open TensorFlow sessions.
+
+
 # The Server API
 
-Start the server using
+## To run object detection models start the server using
 
     python app.py
 
@@ -48,3 +55,15 @@ It should start up on port `PORT` (default: 5000) and begin responding to reques
     }]
 
 The `bounding_box` is in normalized (`[0.0, 1.0]`) coordinates in `[x1, y1, x2, y2]` format. If `DEBUG` is true, during evaluation we will dump all detections and their confidences to stdout. We also dump evaluation times to stdout regardless of the debug setting.
+
+## To run image classification models start the server using
+
+    python app_classify.py
+
+It should start up on port `PORT` (default: 5432) and begin responding to requests on `/classify`. `POSTing` to that address with a multi-part form containing a `modelname` text field with the model prefix name to use and file data with the image to evaluate. It returns a JSON array containing the predicted class from the label map. For example:
+
+    {
+        "class": "cat"
+    }
+
+Note:This repo has been forked from https://github.com/noodlefrenzy/easy-tensorflow-multimodel-server/tree/master/models. Thanks to the author for making this available.
