@@ -11,3 +11,4 @@ pandas
 scipy
 sklearn
 tensorflow-gpu
+opencv
