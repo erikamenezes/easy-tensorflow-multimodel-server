@@ -1,6 +1,6 @@
 # Introduction 
 
-This `ModelServer` repository contains a simple [Flask app](http://flask.pocoo.org/) for hosting multiple [TensorFlow Object Detection](https://github.com/tensorflow/models/tree/master/research/object_detection) models and using them to evaluate incoming images.
+This `ModelServer` repository contains a simple [Flask app](http://flask.pocoo.org/) for hosting multiple [TensorFlow Object Detection](https://github.com/tensorflow/models/tree/master/research/object_detection) and Image Classification models and using them to evaluate incoming images.
 
 # Setting Up
 
