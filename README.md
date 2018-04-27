@@ -63,7 +63,8 @@ The `bounding_box` is in normalized (`[0.0, 1.0]`) coordinates in `[x1, y1, x2, 
 It should start up on port `PORT` (default: 5432) and begin responding to requests on `/classify`. `POSTing` to that address with a multi-part form containing a `modelname` text field with the model prefix name to use and file data with the image to evaluate. It returns a JSON array containing the predicted class from the label map. For example:
 
     {
-        "class": "cat"
+        "class": "cat",
+        "score": "0.99"
     }
 
 Note:This repo has been forked from https://github.com/noodlefrenzy/easy-tensorflow-multimodel-server/tree/master/models. Thanks to the author for making this available.

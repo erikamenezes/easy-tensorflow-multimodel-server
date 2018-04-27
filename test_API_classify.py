@@ -21,4 +21,4 @@ print(r.text)
 
 
 # The output will be something like this:
-# {"class": "Cat"}
+# {"class": "Cat", "score": "0.99"}

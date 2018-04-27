@@ -129,6 +129,7 @@ def evaluate(model, filename):
     result = {}
     print(model['category_index'])
     result['class'] = model['category_index'][result_idx]
+    result['score'] = str(output_dict['loss'][0][result_idx])
     print(result)
     return (json.dumps(result))
 
